@@ -25,7 +25,8 @@
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",
     "reactstrap": "^4.8.0",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "semantic-ui": "^2.2.13"
   },
   "scripts": {
     "start": "react-scripts start",

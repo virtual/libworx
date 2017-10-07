@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Results</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  
+<% include partials/header.ejs %>
 <h1>Results</h1>
 <ul>
 <%
@@ -17,19 +7,30 @@ data.results.forEach((movie)=> { %>
   <li>
       <%
       var image = posterBasePath + movie.poster_path;
+      var movieReleaseDate = new Date(movie.release_date);
       %>
       <a href="movies/show/<%=movie.id%>"><img src="<%=image%>" alt="<%=movie.title%>" /></a>
-      <h2><%=movie.title%> (<%=movie.release_date%>)</h2>
+      <h2><%=movie.title%> (<%=movieReleaseDate.getFullYear()%>) 
+       </h2>
+       
+       <small class="rating-container">
+         
+          <div class="star-ratings-css">
+              <div class="star-ratings-css-top" style="width:  <%=Math.ceil(movie.vote_average * 10)%>%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+            </div>
+            </small>
       <p><%=movie.overview%></p>
     
-   
-    <button>Add to Wishlist</button>
-    
+      <div class="ui buttons">
+          <button class="ui positive button">Available</button>
+          <div class="or"></div>
+          <button class="ui  button">Unavailable</button>
+        </div>
   
   
   </li>
 <% });
 %>
 </ul>
-</body>
-</html>
+<% include partials/footer.ejs %>

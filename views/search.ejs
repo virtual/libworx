@@ -1,6 +1,12 @@
+<% include partials/header.ejs %>
 <h1>Search</h1>
 
 <form action="/results" method="get">
-  <input type="text" name="search" id="search" placeholder="search">
-  <input type="button" value="Submit">
-</form>
+  <div class="ui search">
+      <div class="ui icon input">
+        <input class="prompt" type="text" name="search" id="search" placeholder="search">
+        <i class="search icon"></i>
+      </div> 
+    </div>
+</form> 
+<% include partials/footer.ejs %>

@@ -6,9 +6,10 @@ var port = 5000;
 var config = require('./src/config.js');
 var request = require('request');
 app.use(express.static('public'))
+app.use(express.static('semantic/dist'))
 app.set("view engine", 'ejs');
 
-app.get("/", function(req, res){
+app.get("/search", function(req, res){
   res.render("search");
 });
 
