@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Results</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  
+<h1>Results</h1>
+<ul>
+<%
+var posterBasePath = 'http://image.tmdb.org/t/p/w185/';
+data.results.forEach((movie)=> { %>
+  <li>
+      <%
+      var image = posterBasePath + movie.poster_path;
+      %>
+      <a href="movies/show/<%=movie.id%>"><img src="<%=image%>" alt="<%=movie.title%>" /></a>
+      <h2><%=movie.title%> (<%=movie.release_date%>)</h2>
+      <p><%=movie.overview%></p>
+    
+   
+    <button>Add to Wishlist</button>
+    
+  
+  
+  </li>
+<% });
+%>
+</ul>
+</body>
+</html>
