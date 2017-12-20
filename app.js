@@ -3,7 +3,7 @@ var app = express();
 var bodyParser= require('body-parser');
 var mongoose = require('mongoose');
 var port = 5000;
-var config = require('./src/config.js');
+var config = require('./config.js');
 var request = require('request');
 app.use(express.static('public'))
 app.use(express.static('semantic/dist'))
