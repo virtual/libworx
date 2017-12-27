@@ -17,7 +17,7 @@ export default class MovieList extends Component {
           data: res.data,
           initialized: true
         })  
-        resolve();
+        resolve(res.data);
       });
     })
   }
@@ -31,8 +31,8 @@ export default class MovieList extends Component {
   render() {
    let listHtml = [];
    if (this.state.initialized) {
-     this.state.data.results.forEach((e)=> {
-       listHtml.push(<li>{e.title}</li>)
+     this.state.data.results.forEach((e, i)=> {
+       listHtml.push(<li key={"title"+i}>{e.title}</li>)
      })
 
       return (
