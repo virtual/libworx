@@ -1,7 +1,4 @@
-.App {
-  text-align: center;
-}
-
+ 
 .App-logo { max-width: 200px; height: auto;
 }
 
@@ -12,6 +9,7 @@
   padding: 5rem 24px;
   color: white;
   text-shadow: 0 0 24px #333;
+  text-align: center;
 }
 
 .App-title {
@@ -21,3 +19,6 @@
 .App-intro {
   font-size: large;
 } 
+
+.maincontent { padding-top:2rem; padding-bottom: 3rem}
+.searchbox { padding-bottom: 1rem;}

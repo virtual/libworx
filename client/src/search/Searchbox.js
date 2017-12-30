@@ -49,7 +49,7 @@ export default class Searchbox extends Component {
       messageList = []
     }
     return (
-      <form>
+      <form className="searchbox">
         <label htmlFor="search">{label}</label>
         <input name="search" value={this.state.query} id="search" onChange={this.handleChange} />
         <input type="submit" onClick={this.handleSubmit}/> 

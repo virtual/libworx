@@ -31,6 +31,17 @@ app.post('/results', function(req, res) {
   });
 })
 
+app.get("/genres", function(req, res) {
+  var url = 'https://api.themoviedb.org/3/genre/movie/list?api_key='+ process.env.moviedbAPI + '&language=en-US';
+  console.log('requested', url)
+  request(url, function(err, response, body){
+    if (!err && res.statusCode === 200) {
+      var data = (JSON.parse(body));
+      res.json(data);
+    }  
+  });
+})
+
 app.listen(port, function() {
   console.log('listening on ' + port);
 });
