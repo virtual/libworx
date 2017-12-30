@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Message } from 'semantic-ui-react'
+import { Message, Form, Input, Button, Icon } from 'semantic-ui-react'
 
 export default class Searchbox extends Component {
   constructor() {
@@ -49,13 +49,16 @@ export default class Searchbox extends Component {
       messageList = []
     }
     return (
-      <form className="searchbox">
-        <label htmlFor="search">{label}</label>
-        <input name="search" value={this.state.query} id="search" onChange={this.handleChange} />
-        <input type="submit" onClick={this.handleSubmit}/> 
+
+      <Form className="searchbox">
+      <Form.Field inline>
+        <Input   label={label} type="search" name="search" value={this.state.query} id="search" onChange={this.handleChange} />
+        <Button icon="search" content="Search" color="primary" onClick={this.handleSubmit}/> 
         {messageList}
-        
-      </form>
+      </Form.Field>
+    </Form>
+
+     
     );
   }
 }
