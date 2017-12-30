@@ -1,38 +1,32 @@
-import React from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import React, { Component } from 'react'
+import { Menu, Segment } from 'semantic-ui-react'
 import logo from '../img/libworks-logo.png';
-export default class Menu extends React.Component {
-  constructor(props) {
-    super(props);
+import {Link} from 'react-router-dom';
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
-    };
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
+export default class MenuExampleSecondaryPointing extends Component {
+  state = { activeItem: 'home' }
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   render() {
+    const { activeItem } = this.state
+
     return (
       <div>
-        <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/"> <img src={logo} className="App-logo" alt="LibWorx" /></NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+        <Menu pointing secondary stackable>
+        <Menu.Item as={Link} to="/">
+        <img src={logo} alt="LibWorx" />
+        </Menu.Item>
+          <Menu.Item as={Link} to="/" name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
+          <Menu.Item as={Link} to="movies" name='movies' active={activeItem === 'movies'} onClick={this.handleItemClick} />
+          <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick} />
+          <Menu.Menu position='right'>
+            <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
+          </Menu.Menu>
+        </Menu>
+ 
       </div>
-    );
+    )
   }
 }
+ 

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'; 
 import './App.css';
-import Menu from "./menu/Menu";
-import SliderContent from "./carousel/SliderContent";
-import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
+import Menu from "./menu/Menu";
+import Homepage from './homepage/Homepage';
 import MovieList from './list/Movies';
 import Footer from './footer/Footer';
 import { Container, Button } from 'semantic-ui-react'
@@ -16,8 +15,7 @@ class App extends Component {
       <Router>
         <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
           <Menu/>
-          <SliderContent/>
-          
+          <Route exact path="/" render={()=> <Homepage /> }/>
           <Container style={{flex: 1}} className="maincontent">
             <Route exact path="/movies" render={()=> <MovieList /> }/>
  
