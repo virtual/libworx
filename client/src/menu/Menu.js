@@ -18,9 +18,10 @@ export default class MenuExampleSecondaryPointing extends Component {
         <img src={logo} alt="LibWorx" />
         </Menu.Item>
           <Menu.Item as={Link} to="/" name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-          <Menu.Item as={Link} to="movies" name='movies' active={activeItem === 'movies'} onClick={this.handleItemClick} />
+          <Menu.Item as={Link} to="/movies" name='movies' active={activeItem === 'movies'} onClick={this.handleItemClick} />
           <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick} />
           <Menu.Menu position='right'>
+            <Menu.Item as={Link} to="/login" name='login' active={activeItem === 'login'} onClick={this.handleItemClick} />
             <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
           </Menu.Menu>
         </Menu>
