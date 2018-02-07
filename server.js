@@ -1,80 +1,42 @@
 var express = require('express');
 var app = express();
 var bodyParser= require('body-parser');
-var mongoose = require('mongoose');
-var mongodbUri = require("mongodb-uri");
-mongoose.connect("mongodb://localhost/libworx");
-let db = mongoose.connection;
+var mysql = require("mysql");
 var port = 5000; 
 var request = require('request');
-var passport = require("passport")
-var User = require('./models/User.js')
+var passport = require("passport") 
 require('dotenv').config();
 
 app.use(bodyParser.json({ type: "application/json" }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('semantic/dist'))
+app.use(express.static('semantic/dist')) 
 
-
- 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  console.log('database connected to LibWorx');
+// First you need to create a connection to the db
+var con = mysql.createConnection({
+  host: "localhost",
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DB
 });
-
+con.connect(function(err) {
+  if (err) {
+      console.log("SQL CONNECT ERROR: " + err);
+  } else {
+      console.log("SQL CONNECT SUCCESSFUL.");
+  }
+});
+con.on("close", function (err) {
+  console.log("SQL CONNECTION CLOSED.");
+});
+con.on("error", function (err) {
+  console.log("SQL CONNECTION ERROR: " + err);
+});
 
 if (process.env.NODE_ENV === 'production') { 
   app.use(express.static("./client/build"));
 } else {
   app.use(express.static("public"));  
 }
- 
-var GitHubStrategy = require('passport-github').Strategy;
- 
-passport.use(new GitHubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/github/callback"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ githubId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
-
-// Configure Passport authenticated session persistence.
-//
-// In order to restore authentication state across HTTP requests, Passport needs
-// to serialize users into and deserialize users out of the session.  In a
-// production-quality application, this would typically be as simple as
-// supplying the user ID when serializing, and querying the user record by ID
-// from the database when deserializing.  However, due to the fact that this
-// example does not have a database, the complete Facebook profile is serialized
-// and deserialized.
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
-});
-
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
-
-// Initialize Passport and restore authentication state, if any, from the
-// session.
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.get('/auth/github',
-passport.authenticate('github'));
-
-app.get('/auth/github/callback', 
-passport.authenticate('github', { failureRedirect: '/login' }),
-function(req, res) {
-  // Successful authentication, redirect home.
-  res.redirect('/');
-});
 
 app.post('/results', function(req, res) {
   console.log(req.body);
@@ -107,6 +69,21 @@ app.get('/users', function(req, res) {
       userMap[user._id] = user;
     });
     res.send(userMap);  
+  });
+});
+
+
+app.post('/signup', function(req, res, next) {
+  let user = {};
+  user.firstName = req.body.firstName;
+  user.lastName = req.body.lastName;
+  user.email = req.body.email;
+  user.password = req.body.password;
+ 
+    var sql = `INSERT INTO user (username, password, name_first, name_last) VALUES ('${user.email}', '${user.password}', '${user.firstName}', '${user.lastName}')`;
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log(sql, "Success!");
   });
 });
 
