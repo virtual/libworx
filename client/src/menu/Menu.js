@@ -22,7 +22,7 @@ export default class MenuExampleSecondaryPointing extends Component {
           <Menu.Item name='friends' active={activeItem === 'friends'} onClick={this.handleItemClick} />
           <Menu.Menu position='right'>
             <Menu.Item as={Link} to="/login" name='login' active={activeItem === 'login'} onClick={this.handleItemClick} />
-            <Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick} />
+            <Menu.Item as={Link} to="/signup" name="signup" active={activeItem === 'signup'} onClick={this.handleItemClick} />
           </Menu.Menu>
         </Menu>
  
