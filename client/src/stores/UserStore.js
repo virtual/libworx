@@ -52,6 +52,22 @@ export default class UserStore {
   });
 }
 
+userCollection() {
+  console.log("mew")
+  let userId = JSON.parse(sessionStorage.getItem('user')).id;
+  return new Promise((resolve, reject)=>{
+  axios.get("/collections/" + userId).then((obj)=>{
+      if (obj.data) {
+        // this.user = obj.data
+        console.log(obj.data)
+      } else {
+        console.log("failed");
+        reject(obj);
+      }
+      resolve(obj);
+    })
+  })
+}
 
 createNewUser(newUserObj) {
   return new Promise((resolve, reject)=>{

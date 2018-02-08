@@ -72,6 +72,21 @@ app.get('/users', function(req, res) {
   });
 });
 
+app.get('/collections/:user_id', function(req, res) {
+  let userId = req.params.user_id;
+  var sql = `SELECT * FROM collection WHERE user_id = '${userId}'`;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    if (result.length > 0) { 
+      res.json(result);
+    } else {
+      res.json({message: "No collection"})
+    }
+});
+});
+
+
+
 app.post('/login', function(req, res, next) {
   let user = {}; 
   user.username = req.body.username;
