@@ -72,20 +72,21 @@ createNewUser(newUserObj) {
   })
 }
 
-logout() {
-  axios.get('/logout').then((res)=> {
-    console.log(res);
-    if (res !== undefined) { 
-      this.user = null;  
-      sessionStorage.removeItem('user');
-    }  else {
-      console.log('undefined');
-    }
-  }, function(err){
-    console.log(err);
-  });
- 
-}
-
+  logout() {
+    return new Promise((resolve, reject) => {
+      axios.get('/logout').then((res)=> {
+        if (res.data.loggedIn === false) { 
+          this.user = null;  
+          sessionStorage.removeItem('user');
+        }  else {
+          console.log('undefined');
+          reject(res);
+        }
+        resolve(res);
+      }, function(err){
+          console.log(err);
+      });
+    });
+  }
 
 } // closes UserStore

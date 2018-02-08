@@ -4,8 +4,12 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Menu from "./menu/Menu";
 import Homepage from './homepage/Homepage';
 import MovieList from './list/Movies';
+import Dashboard from './user/Dashboard'
+
 import Login from './login/Login'
+import Logout from './login/Logout'
 import SignUp from './login/Signup'
+
 import Footer from './footer/Footer';
 
 import UserStore from './stores/UserStore';
@@ -31,7 +35,9 @@ class App extends Component {
           <Container style={{flex: 1}} className="maincontent">
             <Route exact path="/movies" render={()=> <MovieList /> }/>
             <Route exact path="/signup" render={()=> <SignUp /> }/>
+            <Route exact path="/dashboard" render={()=> <Dashboard /> }/>
             <Route exact path="/login" render={()=> <Login /> }/>
+            <Route exact path="/logout" render={()=> <Logout /> }/>
  
           </Container>
           <Footer/>

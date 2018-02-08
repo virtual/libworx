@@ -105,6 +105,18 @@ app.post('/signup', function(req, res, next) {
   });
 });
 
+app.get('/logout', function(req, res){
+  if (req.user) {
+    req.logout();
+    res.json({message: 'User logged out', loggedIn: false})
+    req.session.destroy();
+    
+  } else {
+    res.json({message: 'No user logged in', loggedIn: false})
+    
+  }
+});
+
 app.listen(port, function() {
   console.log('listening on ' + port);
 });
