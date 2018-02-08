@@ -72,6 +72,24 @@ app.get('/users', function(req, res) {
   });
 });
 
+app.post('/login', function(req, res, next) {
+  let user = {}; 
+  user.username = req.body.username;
+  user.password = req.body.password;
+  console.log(user);
+ 
+    var sql = `SELECT * FROM user WHERE username='${user.username}' AND password='${user.password}'`;
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      if (result.length > 0) {
+        let userData = result[0];
+        userData.success = true;
+        res.json(userData);
+      } else {
+        res.json({message: "Email and password do not match."})
+      }
+  });
+});
 
 app.post('/signup', function(req, res, next) {
   let user = {};

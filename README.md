@@ -20,3 +20,16 @@ User should be able to:
 
 ### Notes:
 I give a tip of the hat to my grandpa, John Rogers, who spent hours angrily adding movies to Lotus 1-2-3 in an attempt to manage his movie library.
+
+
+## Development
+
+### Mac Notes
+
+- Change MAMP Port to 3306 in MAMP preferences
+
+### Env setup
+moviedbAPI=
+MYSQL_USER=
+MYSQL_PASSWORD=
+MYSQL_DB=

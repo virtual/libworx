@@ -19,16 +19,27 @@ export default class UserStore {
         username: username,
         password: password
      }).then((answer) => { 
-        // console.log(answer);
-        if (answer.data.success) {
+      console.log(answer);
+      console.log(answer.data);
+        if (answer.data.user_id) {
+/*     "user_id": 6,
+    "username": "jeanine.mt@gmail.com",
+    "password": "123",
+    "name_first": "jeanine",
+    "name_last": "schoessler",
+    "created": "2018-02-07T23:14:01.000Z"
+    */
+
+
+
           let loggedUser={
-            firstName: answer.data.firstName, 
-            lastName: answer.data.lastName,
-            email: answer.data.email,
-            id: answer.data.id,
-            img: answer.data.img
+            firstName: answer.data.name_first, 
+            lastName: answer.data.name_last,
+            email: answer.data.username,
+            id: answer.data.user_id,
+            created: answer.data.created
           }
-          this.user = loggedUser; 
+          this.user = loggedUser;  
           sessionStorage.setItem('user', JSON.stringify(loggedUser));  
           
         } else {
