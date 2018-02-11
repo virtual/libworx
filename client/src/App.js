@@ -13,6 +13,7 @@ import SignUp from './login/Signup'
 import Footer from './footer/Footer';
 
 import UserStore from './stores/UserStore';
+import MovieStore from './stores/MovieStore';
 import { Container, Button } from 'semantic-ui-react'
 import {Provider} from 'mobx-react';
 
@@ -26,7 +27,7 @@ class App extends Component {
   }
   render() {
     return (
-      <Provider userStore={new UserStore()}>
+      <Provider userStore={new UserStore()} movieStore={new MovieStore()} >
       <div className="App">
       <Router>
         <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
