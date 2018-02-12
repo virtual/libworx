@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Link, withRouter } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
+import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
-export default class ListItem extends Component {
+class ListItem extends Component {
   constructor() {
     super();
     this.findObjectByKey = this.findObjectByKey.bind(this);
+    this.addToCollection = this.addToCollection.bind(this);
+    this.handleAddClick = this.handleAddClick.bind(this);
   }
-   findObjectByKey(array, key, value) {
+
+  findObjectByKey(array, key, value) {
     for (var i = 0; i < array.length; i++) {
-        if (array[i][key] === parseInt(value)) {
-            return array[i].name;
-        }
+      if (array[i][key] === parseInt(value)) {
+        return array[i].name;
+      }
     }
     return null;
-}
+  }
+
+  addToCollection(imdbID) {
+    console.log("adding movie " + imdbID + " to collection...")
+  }
+
+  handleAddClick(e) {
+    this.addToCollection(e.target.id)
+  }
+
   render() {
     let extra = [];
      
@@ -33,12 +47,18 @@ export default class ListItem extends Component {
     let rating = (this.props.rating > 0) ? "Vote average: " +this.props.rating : 'No votes';
     let releaseYear = new Date(this.props.date);
     releaseYear = releaseYear.getFullYear(releaseYear);
+
+    let buttons = '';
+    if (this.props.userStore.retrieveUser()) {
+      buttons= <Button onClick={this.handleAddClick} id={this.props.id} color="green">+ Add </Button>;
+    }
+
     return (
       <Card>
         <Image src={this.props.image} />
         <Card.Content>
           <Card.Header>
-            {this.props.title}
+            {this.props.title} 
           </Card.Header>
           <Card.Meta>
             <span className='date'>
@@ -47,11 +67,14 @@ export default class ListItem extends Component {
           </Card.Meta>
           <Card.Description >
             {this.props.description}
+            
           </Card.Description>
         </Card.Content>
         {extraHTML}
+        
+        {buttons}
       </Card>
     );
   }
 }
- 
+export default withRouter(inject('userStore')(ListItem));
