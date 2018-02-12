@@ -49,6 +49,20 @@ app.post('/results', function(req, res) {
       res.json(data);
     }  
   });
+});
+
+app.post('/results/movies/:id', function(req, res) {
+  console.log(req.body);
+  var search = req.body.query;
+  var url = 'https://api.themoviedb.org/3/movie/' + req.params.id + '?api_key='+ process.env.moviedbAPI + '&language=en-US';
+  // https://api.themoviedb.org/3/movie/334543?api_key=e066dc69436f34c248064ea13f7b11d6&language=en-US
+  console.log('requested', url)
+  request(url, function(err, response, body){
+    if (!err && res.statusCode === 200) {
+      var data = (JSON.parse(body));
+      res.json(data);
+    }  
+  });
 })
 
 app.get("/genres", function(req, res) {

@@ -42,6 +42,7 @@ export default class Searchbox extends Component {
   
     if (this.state.error != '') {
       messageList.push(<Message
+        key="message1"
         error
         list={[this.state.error]}
       />)
@@ -53,7 +54,7 @@ export default class Searchbox extends Component {
       <Form className="searchbox">
       <Form.Field inline>
         <Input   label={label} type="search" name="search" value={this.state.query} id="search" onChange={this.handleChange} />
-        <Button icon="search" content="Search" color="primary" onClick={this.handleSubmit}/> 
+        <Button icon="search" content="Search" color="blue" onClick={this.handleSubmit}/> 
         {messageList}
       </Form.Field>
     </Form>

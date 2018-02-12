@@ -40,6 +40,7 @@ class MovieList extends Component {
         listHtml.push(
         <ListItem 
           key={"title"+i} 
+          id={e.id}
           title={e.title} 
           image={"http://image.tmdb.org/t/p/w300/" + e.poster_path}
           description={this.props.movieStore.text_truncate(e.overview)}
@@ -51,7 +52,7 @@ class MovieList extends Component {
         )
       })
     } else {
-      listHtml.push(<li>No results</li>)
+      listHtml.push(<li key="noresults">No results</li>)
     }
 
       return (

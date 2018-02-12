@@ -6,7 +6,7 @@ export default class UserStore {
     extendObservable(this, {
       user: null,
       message: null,
-      get retrieveUser() {
+      retrieveUser() {
         return this.user;
       }
     })
