@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Searchbox from '../search/Searchbox';
 import ListItem from '../list/ListItem';
+import undefinedPoster from'../img/undefined-media.gif';
 let axios = require('axios');
 
 class MovieList extends Component {
@@ -37,12 +38,15 @@ class MovieList extends Component {
    if (this.state.initialized) {
      if (this.state.data.results) {
         this.state.data.results.forEach((e, i) => {
+          let poster = (e.poster_path)
+          ? "http://image.tmdb.org/t/p/w300/" + e.poster_path 
+          : undefinedPoster;
         listHtml.push(
         <ListItem 
           key={"title"+i} 
           id={e.id}
           title={e.title} 
-          image={"http://image.tmdb.org/t/p/w300/" + e.poster_path}
+          image={poster}
           description={this.props.movieStore.text_truncate(e.overview)}
           extra={e.genre_ids}
           rating={e.vote_average}
