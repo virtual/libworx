@@ -3,15 +3,16 @@ var axios = require('axios');
 
 export default class UserStore {
   constructor() {
+    let userVal = sessionStorage.getItem('user')? JSON.parse(sessionStorage.getItem('user')) : null;
     extendObservable(this, {
-      user: null,
+      user: userVal,
       message: null,
       retrieveUser() {
         return this.user;
-      }
+      } 
     })
   }
-    
+  
   loginUser(username, password) {
     // console.log(username, password);
     return new Promise((resolve, reject) => {
@@ -21,16 +22,7 @@ export default class UserStore {
      }).then((answer) => { 
       console.log(answer);
       console.log(answer.data);
-        if (answer.data.user_id) {
-/*     "user_id": 6,
-    "username": "jeanine.mt@gmail.com",
-    "password": "123",
-    "name_first": "jeanine",
-    "name_last": "schoessler",
-    "created": "2018-02-07T23:14:01.000Z"
-    */
-
-
+        if (answer.data.user_id) { 
 
           let loggedUser={
             firstName: answer.data.name_first, 
@@ -44,7 +36,6 @@ export default class UserStore {
           
         } else {
           reject(answer)
-          // console.log(answer.data.message);
           this.message = answer.data.message
         }
         resolve(answer)
@@ -53,7 +44,6 @@ export default class UserStore {
 }
 
 userCollection() {
-  console.log("mew")
   let userId = JSON.parse(sessionStorage.getItem('user')).id;
   return new Promise((resolve, reject)=>{
   axios.get("/collections/" + userId).then((obj)=>{

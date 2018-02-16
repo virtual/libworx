@@ -30,9 +30,13 @@ class Dashboard extends Component {
   }
   render() {
     console.log(this.state.collection)
+    console.log(this.props.userStore.retrieveUser());
+    let welcomeMsg = this.props.userStore.retrieveUser() ? ", " + this.props.userStore.retrieveUser().firstName : '';
     if (this.state.loaded) { // checking for this instead of state.collection makes page rerender correctly
     return (
       <div>
+        <h1>Dashboard</h1>
+        <p>Welcome{welcomeMsg}</p>
         <ShowList collection={this.state.collection} />
       </div>
     );
