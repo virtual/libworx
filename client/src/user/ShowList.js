@@ -20,7 +20,7 @@ export default class ShowList extends Component {
         let col = [];
         collection.forEach((e, i)=> {
           console.log('e',e)
-          col.push(<p key={i}>Media ID: {e.media_id}</p>)
+          col.push(<p key={i}>Media ID: {e.name}</p>)
         })
         return col;
       }

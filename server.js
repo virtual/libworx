@@ -88,7 +88,9 @@ app.get('/users', function(req, res) {
 
 app.get('/collections/:user_id', function(req, res) {
   let userId = req.params.user_id;
-  var sql = `SELECT * FROM collection WHERE user_id = '${userId}'`;
+  var sql = `SELECT media.id, media.media_type_id, media.name, media.external_id, media.release_date FROM collection
+    INNER JOIN media ON media.id=collection.media_id
+    WHERE collection.user_id =  '${userId}'`;
   con.query(sql, function (err, result) {
     if (err) throw err;
     if (result.length > 0) { 
