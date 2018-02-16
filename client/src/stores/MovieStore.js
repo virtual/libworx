@@ -35,6 +35,21 @@ export default class MovieStore {
     })
   }
 
+  getMovieInfo(imdbId) {
+    return new Promise((resolve, reject)=>{
+    axios.get("/results/movies/" + imdbId).then((obj)=>{
+        if (obj.data) {
+          // this.user = obj.data
+          console.log(obj.data)
+        } else {
+          console.log("failed");
+          reject(obj);
+        }
+        resolve(obj);
+      })
+    })
+  }
+
   getGenres() {
     return new Promise((resolve, reject) => {
       axios.get('/genres', {

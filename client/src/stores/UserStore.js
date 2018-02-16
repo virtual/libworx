@@ -7,6 +7,7 @@ export default class UserStore {
     extendObservable(this, {
       user: userVal,
       message: null,
+      collection: null,
       retrieveUser() {
         return this.user;
       } 
@@ -48,7 +49,7 @@ userCollection() {
   return new Promise((resolve, reject)=>{
   axios.get("/collections/" + userId).then((obj)=>{
       if (obj.data) {
-        // this.user = obj.data
+        this.collection = obj.data
         console.log(obj.data)
       } else {
         console.log("failed");

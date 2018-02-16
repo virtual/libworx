@@ -51,9 +51,7 @@ app.post('/results', function(req, res) {
   });
 });
 
-app.post('/results/movies/:id', function(req, res) {
-  console.log(req.body);
-  var search = req.body.query;
+app.get('/results/movies/:id', function(req, res) {
   var url = 'https://api.themoviedb.org/3/movie/' + req.params.id + '?api_key='+ process.env.moviedbAPI + '&language=en-US';
   // https://api.themoviedb.org/3/movie/334543?api_key=e066dc69436f34c248064ea13f7b11d6&language=en-US
   console.log('requested', url)

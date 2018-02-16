@@ -50,7 +50,15 @@ class ListItem extends Component {
 
     let buttons = '';
     if (this.props.userStore.retrieveUser()) {
-      buttons= <Button onClick={this.handleAddClick} id={this.props.id} color="green">+ Add </Button>;
+      if (false) {
+        // need to make a way to easily look through external ids of collection only
+        console.log('in collection!')
+        buttons= <Button onClick={this.handleAddClick} id={this.props.id} color="red">- Remove </Button>;
+        
+      } else {
+
+        buttons= <Button onClick={this.handleAddClick} id={this.props.id} color="green">+ Add </Button>;
+      }
     }
 
     return (

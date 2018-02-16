@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Card, Icon, Image } from 'semantic-ui-react'
+import Movie from '../list/Movie';
 
 export default class ShowList extends Component {
   constructor() {
@@ -20,7 +22,7 @@ export default class ShowList extends Component {
         let col = [];
         collection.forEach((e, i)=> {
           console.log('e',e)
-          col.push(<p key={i}>Media ID: {e.name}</p>)
+          col.push(<Movie key={i} id={e.external_id} />)
         })
         return col;
       }
@@ -31,7 +33,9 @@ export default class ShowList extends Component {
       return (
         <div>
           <h2>Collection</h2>
+          <Card.Group stackable={true} itemsPerRow={4} doubling={true}>
           {col}
+          </Card.Group>
         </div>
       );
     } else {
